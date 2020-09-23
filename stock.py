@@ -89,8 +89,12 @@ def stock(choose = '1'):
                 i += 1
 
             # 清空畫面
+
+            # Windows
             if platform.system() == 'Windows':
                 os.system('cls')
+
+            # Linux / MacOS
             else:
                 os.system('clear')
 
