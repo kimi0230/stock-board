@@ -9,7 +9,7 @@
 
 import requests
 from bs4 import BeautifulSoup
-import datetime
+from datetime import datetime as dt
 import time
 import prettytable as pt
 import os
@@ -34,7 +34,7 @@ def stock(choose = '1'):
         url = 'https://tw.stock.yahoo.com/d/i/rank.php?t=vol&e=' + market['code']
 
         # 當日收盤時間
-        close_time = datetime.datetime.strptime(datetime.datetime.now().strftime("%Y/%m/%d") + " 13:30:00", "%Y/%m/%d %H:%M:%S")
+        close_time = dt.strptime(dt.now().strftime("%Y/%m/%d") + " 13:30:00", "%Y/%m/%d %H:%M:%S")
 
         while True:
 
@@ -91,7 +91,7 @@ def stock(choose = '1'):
             os.system('clear')
 
             # 時間顯示調整
-            show_time = datetime.datetime.now().strftime("%Y/%m/%d") + ' (本日已收盤)' if datetime.datetime.now() > close_time else datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+            show_time = dt.now().strftime("%Y/%m/%d") + ' (本日已收盤)' if dt.now() > close_time else dt.now().strftime("%Y/%m/%d %H:%M:%S")
 
             # 輸出表單
             print('\n' + market['title'] + '成交量排行: ' + show_time)
