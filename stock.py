@@ -99,10 +99,6 @@ def stock(choose = '1'):
             print('\n', market['title'] + '成交量排行: ' + show_time)
             print(tb)
 
-            # 已收盤自動退出
-            if datetime.datetime.now() > close_time:
-                break
-
             # 睡一秒
             print('[離開] Ctrl + C')
             time.sleep(1)
