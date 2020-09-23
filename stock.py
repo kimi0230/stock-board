@@ -33,7 +33,7 @@ def stock(choose = '1'):
         # Yahoo 網址
         url = 'https://tw.stock.yahoo.com/d/i/rank.php?t=vol&e=' + market['code']
 
-        # 收盤時間
+        # 當日收盤時間
         close_time = datetime.datetime.strptime(datetime.datetime.now().strftime("%Y/%m/%d") + " 13:30:00", "%Y/%m/%d %H:%M:%S")
 
         while True:
@@ -90,13 +90,11 @@ def stock(choose = '1'):
             # 清空畫面
             os.system('clear')
 
-            # 時間調整
-            show_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-            if datetime.datetime.now() > close_time:
-                show_time = datetime.datetime.now().strftime("%Y/%m/%d") + ' (本日已收盤)'
+            # 時間顯示調整
+            show_time = datetime.datetime.now().strftime("%Y/%m/%d") + ' (本日已收盤)' if datetime.datetime.now() > close_time else datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 
             # 輸出表單
-            print('\n', market['title'] + '成交量排行: ' + show_time)
+            print('\n' + market['title'] + '成交量排行: ' + show_time)
             print(tb)
 
             # 睡一秒
