@@ -1,5 +1,5 @@
 <p align="center"><h1>台股即時行情</h1></p>
-<p align="left">即時從 Yahoo 股市抓上市/上櫃排行榜</p>
+<p align="left">即時從 Yahoo 股市抓上市/櫃成量排行</p>
 <br/><br/>
 
 

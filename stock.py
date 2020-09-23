@@ -1,7 +1,9 @@
 
 '''
 
-[ 當日熱門股即時行情 ]
+[ 台股即時行情 ]
+
+即時從 Yahoo 股市抓上市/櫃成量排行
 
 '''
 
@@ -68,7 +70,7 @@ def stock(choose = '1'):
             os.system('clear')
 
             # 輸出表單
-            print('\n[', market['title'], '] 成交量排行榜: ', datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S"))
+            print('\n[', market['title'], '] 成交量排行: ', datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S"))
             print(tb, '\n')
 
             # 睡一秒
