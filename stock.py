@@ -18,11 +18,14 @@ from colorama import init, Fore
 def stock(choose = '1'):
 
     try:
+
+        # 條件初始化
         market = {
             'code': 'tse',
             'title': '上市'
         }
 
+        # 根據選擇變更條件
         if choose == '2':
             market['code'] = 'otc'
             market['title'] = '上櫃'
