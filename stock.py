@@ -14,6 +14,7 @@ import time
 import prettytable as pt
 import os
 from colorama import init, Fore
+import platform
 
 def stock(choose = '1'):
 
@@ -88,13 +89,16 @@ def stock(choose = '1'):
                 i += 1
 
             # 清空畫面
-            os.system('clear')
+            if platform.system() == 'Windows':
+                os.system('cls')
+            else:
+                os.system('clear')
 
             # 時間顯示調整
             show_time = dt.now().strftime("%Y/%m/%d") + ' (本日已收盤)' if dt.now() > close_time else dt.now().strftime("%Y/%m/%d %H:%M:%S")
 
             # 輸出表單
-            print('\n' + market['title'] + '成交量排行: ' + show_time)
+            print('\n' + market['title'] + '成量排行: ' + show_time)
             print(tb)
 
             # 睡一秒
@@ -104,5 +108,5 @@ def stock(choose = '1'):
         pass
 
 # 執行
-choose = input('\n請選擇: [1]上市成交量排行 [2]上櫃成交量排行\n')
+choose = input('\n請選擇: [1] 上市成量排行 | [2] 上櫃成量排行\n')
 stock(choose)
