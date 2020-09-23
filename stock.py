@@ -70,8 +70,9 @@ def stock(choose = '1'):
             os.system('clear')
 
             # 輸出表單
-            print('\n[', market['title'], '] 成交量排行: ', datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S"))
-            print(tb, '\n')
+            print('\n', market['title'], '成交量排行: ', datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S"))
+            print(tb)
+            print('[離開] Ctrl + C')
 
             # 睡一秒
             time.sleep(1)
@@ -80,5 +81,5 @@ def stock(choose = '1'):
         pass
 
 # 執行
-choose = input('請選擇: [1]上市成交排行 | [2]上櫃成交排行\n')
+choose = input('\n請選擇: [1]上市成交量排行 | [2]上櫃成交量排行\n')
 stock(choose)
