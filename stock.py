@@ -104,5 +104,5 @@ def stock(choose = '1'):
         pass
 
 # 執行
-choose = input('\n請選擇: [1]上市成交量排行 | [2]上櫃成交量排行\n')
+choose = input('\n請選擇: [1]上市成交量排行 [2]上櫃成交量排行\n')
 stock(choose)
