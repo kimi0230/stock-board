@@ -13,6 +13,7 @@ import datetime
 import time
 import prettytable as pt
 import os
+from colorama import init, Fore
 
 def stock(choose = '1'):
 
@@ -59,6 +60,20 @@ def stock(choose = '1'):
                     updown = tmp[3].text
                     updown_percent = tmp[4].text
                     volume = tmp[8].text
+
+                    # 價格漲跌資料
+
+                    # 漲(紅)
+                    if float(tmp[4].text[:-1]) > 0:
+                        price = Fore.RED + tmp[2].text + Fore.RESET
+                        updown = Fore.RED + tmp[3].text + Fore.RESET
+                        updown_percent = Fore.RED + tmp[4].text + Fore.RESET
+
+                    # 跌(綠)
+                    elif float(tmp[4].text[:-1]) < 0:
+                        price = Fore.GREEN + tmp[2].text + Fore.RESET
+                        updown = Fore.GREEN + tmp[3].text + Fore.RESET
+                        updown_percent = Fore.GREEN + tmp[4].text + Fore.RESET
 
                     # 把資料塞進表單
                     tb.add_row([index, title, price, updown, updown_percent, volume])
