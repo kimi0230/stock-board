@@ -123,9 +123,12 @@ def stock(choose='1'):
             # 未開盤 / 收盤時間顯示調整
             if dt.now() < open_time or dt.now() > close_time:
                 market_close = True
-                show_status = ' (本日未開盤)' if dt.now(
+
+                # 未開盤/收盤備註
+                close_memo = ' (本日未開盤)' if dt.now(
                 ) < open_time else ' (本日已收盤)'
-                show_time = dt.now().strftime("%Y/%m/%d") + show_status
+
+                show_time = dt.now().strftime("%Y/%m/%d") + close_memo
 
             # 輸出表單
             print('\n' + market['title'] + '成量排行: ' + show_time)
