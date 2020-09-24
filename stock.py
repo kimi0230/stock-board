@@ -1,8 +1,6 @@
 '''
-
 [ 台股即時行情 ]
 即時從 Yahoo 股市抓上市/櫃成量排行
-
 '''
 
 import requests
