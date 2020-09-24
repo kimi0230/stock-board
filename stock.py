@@ -125,5 +125,5 @@ def stock(choose='1'):
 
 
 # 執行
-choose = input('\n請選擇: [1] 上市成量排行 | [2] 上櫃成量排行\n')
+choose = input('\n選擇市場別 (預設為1): [1] 上市成量排行 | [2] 上櫃成量排行\n')
 stock(choose)
