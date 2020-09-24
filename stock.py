@@ -1,8 +1,6 @@
-
 '''
 
 [ 台股即時行情 ]
-
 即時從 Yahoo 股市抓上市/櫃成量排行
 
 '''
@@ -13,10 +11,11 @@ from datetime import datetime as dt
 import time
 import prettytable as pt
 import os
-from colorama import init, Fore
+from colorama import init, Fore, Back
 import platform
 
-def stock(choose = '1'):
+
+def stock(choose='1'):
 
     try:
 
@@ -32,10 +31,12 @@ def stock(choose = '1'):
             market['title'] = '上櫃'
 
         # Yahoo 網址
-        url = 'https://tw.stock.yahoo.com/d/i/rank.php?t=vol&e=' + market['code']
+        url = 'https://tw.stock.yahoo.com/d/i/rank.php?t=vol&e=' + \
+            market['code']
 
         # 當日收盤時間
-        close_time = dt.strptime(dt.now().strftime("%Y/%m/%d") + " 13:30:00", "%Y/%m/%d %H:%M:%S")
+        close_time = dt.strptime(dt.now().strftime(
+            "%Y/%m/%d") + " 13:30:00", "%Y/%m/%d %H:%M:%S")
 
         while True:
 
@@ -70,20 +71,31 @@ def stock(choose = '1'):
 
                     # 價格漲跌資料
 
-                    # 漲(紅)
+                    # 漲(紅)△
                     if float(tmp[4].text[:-1]) > 0:
                         price = Fore.RED + tmp[2].text + Fore.RESET
                         updown = Fore.RED + tmp[3].text + Fore.RESET
                         updown_percent = Fore.RED + tmp[4].text + Fore.RESET
 
-                    # 跌(綠)
+                        # 漲停 ▲
+                        if updown.find('▲') > 0:
+                            price = Back.RED + ' ' + \
+                                tmp[2].text + ' ' + Back.RESET
+
+                    # 跌(綠)▽
                     elif float(tmp[4].text[:-1]) < 0:
                         price = Fore.GREEN + tmp[2].text + Fore.RESET
                         updown = Fore.GREEN + tmp[3].text + Fore.RESET
                         updown_percent = Fore.GREEN + tmp[4].text + Fore.RESET
 
+                        # 跌停 ▼
+                        if updown.find('▼') > 0:
+                            price = Back.GREEN + ' ' + \
+                                tmp[2].text + ' ' + Back.RESET
+
                     # 把資料塞進表單
-                    tb.add_row([index, title, price, updown, updown_percent, volume])
+                    tb.add_row([index, title, price, updown,
+                                updown_percent, volume])
 
                 # 取資料格式檢查用
                 i += 1
@@ -99,7 +111,9 @@ def stock(choose = '1'):
                 os.system('clear')
 
             # 時間顯示調整
-            show_time = dt.now().strftime("%Y/%m/%d") + ' (本日已收盤)' if dt.now() > close_time else dt.now().strftime("%Y/%m/%d %H:%M:%S")
+            show_time = dt.now().strftime("%Y/%m/%d") + \
+                ' (本日已收盤)' if dt.now() > close_time else dt.now().strftime(
+                    "%Y/%m/%d %H:%M:%S")
 
             # 輸出表單
             print('\n' + market['title'] + '成量排行: ' + show_time)
@@ -110,6 +124,7 @@ def stock(choose = '1'):
             time.sleep(1)
     except:
         pass
+
 
 # 執行
 choose = input('\n請選擇: [1] 上市成量排行 | [2] 上櫃成量排行\n')
