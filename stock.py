@@ -28,17 +28,23 @@ def stock(choose='1'):
             market['code'] = 'otc'
             market['title'] = '上櫃'
 
-        # Yahoo 網址
+        # Yahoo 股市網址
         url = 'https://tw.stock.yahoo.com/d/i/rank.php?t=vol&e=' + \
             market['code']
+
+        # 當日開盤時間
+        open_time = dt.strptime(dt.now().strftime(
+            "%Y/%m/%d") + " 09:00:00", "%Y/%m/%d %H:%M:%S")
 
         # 當日收盤時間
         close_time = dt.strptime(dt.now().strftime(
             "%Y/%m/%d") + " 13:30:00", "%Y/%m/%d %H:%M:%S")
+
         # 是否收盤
         market_close = False
 
         while market_close == False:
+
             # 取得網頁內容
             rs = requests.get(url)
 
@@ -111,11 +117,15 @@ def stock(choose='1'):
             else:
                 os.system('clear')
 
-            # 收盤時間顯示調整
+            # 時間顯示
             show_time = dt.now().strftime("%Y/%m/%d %H:%M:%S")
-            if dt.now() > close_time:
+
+            # 未開盤 / 收盤時間顯示調整
+            if dt.now() < open_time or dt.now() > close_time:
                 market_close = True
-                show_time = dt.now().strftime("%Y/%m/%d") + ' (本日已收盤)'
+                show_status = ' (本日未開盤)' if dt.now(
+                ) < open_time else ' (本日已收盤)'
+                show_time = dt.now().strftime("%Y/%m/%d") + show_status
 
             # 輸出表單
             print('\n' + market['title'] + '成量排行: ' + show_time)
