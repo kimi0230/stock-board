@@ -35,9 +35,10 @@ def stock(choose='1'):
         # 當日收盤時間
         close_time = dt.strptime(dt.now().strftime(
             "%Y/%m/%d") + " 13:30:00", "%Y/%m/%d %H:%M:%S")
+        # 是否收盤
+        market_close = False
 
-        while True:
-
+        while market_close == False:
             # 取得網頁內容
             rs = requests.get(url)
 
@@ -73,7 +74,8 @@ def stock(choose='1'):
                     if float(tmp[4].text[:-1]) > 0:
                         price = Fore.RED + tmp[2].text + Fore.RESET
                         updown = Fore.RED + tmp[3].text + Fore.RESET
-                        updown_percent = Fore.RED + tmp[4].text + Fore.RESET
+                        updown_percent = Fore.RED + \
+                            tmp[4].text + Fore.RESET
 
                         # 漲停 ▲
                         if updown.find('▲') > 0:
@@ -84,7 +86,8 @@ def stock(choose='1'):
                     elif float(tmp[4].text[:-1]) < 0:
                         price = Fore.GREEN + tmp[2].text + Fore.RESET
                         updown = Fore.GREEN + tmp[3].text + Fore.RESET
-                        updown_percent = Fore.GREEN + tmp[4].text + Fore.RESET
+                        updown_percent = Fore.GREEN + \
+                            tmp[4].text + Fore.RESET
 
                         # 跌停 ▼
                         if updown.find('▼') > 0:
@@ -108,10 +111,11 @@ def stock(choose='1'):
             else:
                 os.system('clear')
 
-            # 時間顯示調整
-            show_time = dt.now().strftime("%Y/%m/%d") + \
-                ' (本日已收盤)' if dt.now() > close_time else dt.now().strftime(
-                    "%Y/%m/%d %H:%M:%S")
+            # 收盤時間顯示調整
+            show_time = dt.now().strftime("%Y/%m/%d %H:%M:%S")
+            if dt.now() > close_time:
+                market_close = True
+                show_time = dt.now().strftime("%Y/%m/%d") + ' (本日已收盤)'
 
             # 輸出表單
             print('\n' + market['title'] + '成量排行: ' + show_time)
